@@ -56,16 +56,26 @@ function countDate(birthday) {
   let year = new Date(birthday).getFullYear();
   let different;
 
-  new Date(birthday).getMonth() > new Date().getMonth()
-    ? (different = today - 1 - year)
-    : (different = today - year);
+  if (
+    new Date(birthday).getMonth() > new Date().getMonth() ||
+    (new Date(birthday).getMonth() == new Date().getMonth() &&
+      new Date(birthday).getDate() > new Date().getDate())
+  ) {
+    different = today - 1 - year;
+  } else {
+    different = today - year;
+  }
+
+  // new Date(birthday).getMonth() > new Date().getMonth()
+  //   ? (different = today - 1 - year)
+  //   : (different = today - year);
 
   //   different = different / 1000 / 60 / 60 / 24 / 365;
   //   different = Math.floor(different);
   console.log(`Кількість повних років: ${different}`);
 }
 
-countDate("1996-09-28");
+countDate("2000-03-23");
 
 //   [ IV ] Final countdown
 function newYearDate(param) {
