@@ -19,23 +19,23 @@ const fileSystem = {
   ],
 };
 
-function def(obj) {
+function freeze(obj) {
   Object.freeze(obj);
   if (Array.isArray(obj)) {
     obj.forEach((element) => {
       Object.freeze(element);
-      return def(element);
+      return freeze(element);
     });
   } else {
     for (let key in obj) {
       if (Array.isArray(obj[key])) {
-        return def(obj[key]);
+        return freeze(obj[key]);
       }
     }
   }
 }
 
-def(fileSystem);
+freeze(fileSystem);
 
 //   [ II ] Days difference
 function countDate(firstDate, secondDate) {
